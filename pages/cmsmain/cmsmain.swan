@@ -1,0 +1,52 @@
+<import src="../../bdParse/bdParse/bdParse.swan" />
+<text class="g-h1">{{title}}}</text>
+<view class="g-h2">
+	<text class="u-t1">{{writer}}}</text>
+	<text class="u-t2">{{column}}}</text>
+</view>
+<view class="g-main-box {{ellipsis?'ellipsis':'unellipsis'}}">
+	<template is="bdParse" data="{{ {bdParseData:article.nodes} }}" />
+	<!-- 这是透明背景，完全显示的时候，隐藏这个-->
+	<view class="{{ellipsis?'u-bg':'u-bg-ellipsis'}}"></view>
+</view>
+<!-- 显示更多按钮，点击展开后，添加class：“f-hover”，让箭头变上 -->
+<view class="{{ellipsis?'g-main-btn':'g-main-btn-ellipsis'}} " hidden='{{isBindEllipsis}}}' bindtap='ellipsis'>
+	<text>显示全部</text>
+	<view class="u-icon"></view>
+</view>
+<view class="g-recomd-box">
+	<text class="u-h3">{{relatedTitle}}}</text>
+</view>
+<view class="ad-container">
+	<div style="background-color: #fff">
+		<view hidden='{{isInWeek}}'>
+			<ad appid="c346a49a" apid="6547679" class="ad" type="feed"></ad>
+		</view>
+		<view hidden='{{!isInWeek}}'>
+			<ad appid="c346a49a" apid="6481417" class="ad" type="feed"></ad>
+			<ad appid="c346a49a" apid="6482334" class="ad" type="feed"></ad>
+			<ad appid="c346a49a" apid="6482339" class="ad" type="feed"></ad>
+		</view>
+	</div>
+</view>
+<view class="g-recomd-box">
+	<text class="u-h4">{{recommendTitle}}}</text>
+	<view s-for-index="idx" s-for="{{itemRecommends}}">
+		<view hidden='{{isInWeek}}'>
+			<ad s-if="{{idx==0}}" appid="c346a49a" apid="6547680" class="ad" type="feed"></ad>
+		</view>
+		<ad s-if="{{idx==5}}" appid="c346a49a" apid="6543160" class="ad" type="feed"></ad>
+		<ad s-if="{{idx==10}}" appid="c346a49a" apid="6543162" class="ad" type="feed"></ad>
+		<view class="m-cont" data-item="{{item}}" bindtap='gotomain'>
+			<image src="{{item.titlepic}}}"></image>
+			<text>{{item.title}}}</text>
+		</view>
+		<view hidden='{{isInWeek}}'>
+			<ad s-if="{{idx==itemRecommends.length-1}}" appid="c346a49a" apid="6543164" class="ad" type="feed"></ad>
+		</view>
+		<view hidden='{{!isInWeek}}'>
+			<ad s-if="{{idx==itemRecommends.length-1}}" appid="c346a49a" apid="6543164" class="ad" type="feed"></ad>
+		</view>
+	</view>
+
+</view>

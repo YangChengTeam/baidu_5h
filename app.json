@@ -1,0 +1,16 @@
+{
+    "pages": [
+        
+        "pages/home/home",
+        "pages/list/list",
+          "pages/cmsmain/cmsmain",
+        "pages/search/search"
+    ],
+    "window": {
+        "navigationBarBackgroundColor": "#ffffff",
+        "navigationBarTextStyle": "black",
+        "navigationBarTitleText": "智能小程序",
+        "backgroundTextStyle": "light"
+    },
+       "prefetches": ["https://api.5h.com/baiduApi.php?action=detail&id=${id}"]
+}

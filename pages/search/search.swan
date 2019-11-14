@@ -1,0 +1,20 @@
+<view class="g-search-bigbox">
+	<view class="g-search-box">
+		<image src="/images/icon-1.png" class="u-icon"></image>
+		<input value="{{keyword}}" placeholder="请输入你想查询的关键字" bindinput="inputKey" bindblur="inputKey"
+			bindconfirm="inputKey" />
+	</view>
+	<view class="u-search-btn" bindtap="gotosearchlist">搜索</view>
+</view>
+<view class="g-hot-search">
+	<text class="u-h3">热门搜索</text>
+	<view class="m-cont">
+		<view class="u-link" data-val="{{item.name}}" bindtap="hotgoin" s-for="{{hotsearchData}}">{{item.name}}</view>
+		<!-- <view class="u-link" data-val={{item}} bindtap="hotgoin">{{{{item}}}}</view> -->
+		<!-- <view class="u-link" data-val="盘发的造型" bindtap="hotgoin">盘发的造型</view>
+		<view class="u-link" data-val="送人必看" bindtap="hotgoin">送人必看</view>
+		<view class="u-link" data-val="BB修复霜" bindtap="hotgoin">BB修复霜</view>
+		<view class="u-link" data-val="香奈儿" bindtap="hotgoin">香奈儿</view>
+		<view class="u-link" data-val="牛奶" bindtap="hotgoin">牛奶</view> -->
+	</view>
+</view>

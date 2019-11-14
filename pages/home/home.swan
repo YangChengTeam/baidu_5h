@@ -1,0 +1,34 @@
+<nav pageName="{{pageName}}"></nav>
+
+<view class="g-swiper-box">
+	<swiper autoplay="true" indicator-color="#fff" indicator-active-color="#f00b7e" duration="{{switchDuration}}"
+		interval="{{autoPlayInterval}}" autoplay="{{switchAutoPlayStatus}}" indicator-dots="{{switchIndicateStatus}}"
+		vertical="false" circular="true" current="0" bind:change="swiperChange">
+		<block s-for="item in itemBanners">
+			<swiper-item bindtap='gotomain' data-item="{{item}}" class="m-swiper-cont">
+				<view class="u-swiper-li">
+					<image src="{{item.titlepic}}"></image>
+					<text>{{item.title}}</text>
+				</view>
+			</swiper-item>
+		</block>
+	</swiper>
+</view>
+
+<view class="g-main-list">
+	<block s-for-index="idx"s-for="{{itemNews}}">
+        <view class="m-list-cont2" s-if="{{idx==0}}">
+            <ad appid="c346a49a" apid="6481417" class="ad" type="feed" ></ad>
+            <!-- <ad  class="ad"  appid="c346a49a" apid="6539265" type="feed"></ad> -->
+        </view>
+		<view class="m-list-cont"   data-item="{{item}}" catchtap='gotomain' >
+			<image src="{{item.titlepic}}}"></image>
+			<text>{{item.title}}}</text>
+		</view>
+        <view class="m-list-cont2" s-if="{{(idx+1)%6==0}}">
+            <ad  class="ad"  appid="c346a49a" apid="6539265" type="feed"></ad>
+        </view>
+	</block>
+</view>
+<view class="u-loading-text">{{loading}}</view>
+<w-back-top bindtap="onBackTop" s-if="{{showBackTop}}" />

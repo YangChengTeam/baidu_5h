@@ -1,0 +1,7 @@
+{
+    "navigationBarTitleText": "5号美人",
+    "usingComponents":{
+        "nav": "/components/nav/nav",
+          "w-back-top": "/components/w-back-top/w-back-top"
+    }
+}

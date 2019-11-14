@@ -1,0 +1,9 @@
+<nav pageName="{{pageName}}" keyword="{{keyword}}" pageNumber="{{pageNumber}}" bindsendParentSearch="receiveData"></nav>
+<view class="g-main-list">
+	<view class="m-list-cont" data-item="{{item}}" bindtap="gotomain" s-for="{{itemLists}}">
+		<image src="{{item.titlepic}}}"></image>
+		<text>{{item.title}}}</text>
+	</view>
+</view>
+<view class="u-loading-text">{{loading}}</view>
+<w-back-top bindtap="onBackTop" s-if="{{showBackTop}}" />
