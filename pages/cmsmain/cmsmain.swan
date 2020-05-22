@@ -1,8 +1,10 @@
 <import src="../../bdParse/bdParse/bdParse.swan" />
+<image class="g-skeleton" hidden='{{isShowSkeleton}}' src="/images/cmsmain_Skeleton.png" }}"></image>
 <text class="g-h1">{{title}}}</text>
 <view class="g-h2">
 	<text class="u-t1">{{writer}}}</text>
 	<text class="u-t2">{{column}}}</text>
+	<text class="u-t3">{{newDate}}}</text>
 </view>
 <view class="g-main-box {{ellipsis?'ellipsis':'unellipsis'}}">
 	<template is="bdParse" data="{{ {bdParseData:article.nodes} }}" />
@@ -14,10 +16,23 @@
 	<text>显示全部</text>
 	<view class="u-icon"></view>
 </view>
+
 <view class="g-recomd-box">
 	<text class="u-h3">{{relatedTitle}}}</text>
+	<!-- <ad appid="c346a49a" apid="7044162" class="ad" type="feed" ></ad> -->
+
+	<ad appid="c346a49a" apid="6481417" class="ad" type="feed"></ad>
+	<ad appid="c346a49a" apid="6482334" class="ad" type="feed"></ad>
+	<ad appid="c346a49a" apid="6482339" class="ad" type="feed"></ad>
+
+	<view s-for-index="idx" s-for="{{itemRelated}}">
+		<view class="m-cont" data-item="{{item}}" bindtap='gotomain'>
+			<image src="{{item.titlepic}}}"></image>
+			<text>{{item.title}}}</text>
+		</view>
+	</view>
 </view>
-<view class="ad-container">
+<!-- <view class="ad-container">
 	<div style="background-color: #fff">
 		<view hidden='{{isInWeek}}'>
 			<ad appid="c346a49a" apid="6547679" class="ad" type="feed"></ad>
@@ -28,7 +43,9 @@
 			<ad appid="c346a49a" apid="6482339" class="ad" type="feed"></ad>
 		</view>
 	</div>
-</view>
+ -->
+
+
 <view class="g-recomd-box">
 	<text class="u-h4">{{recommendTitle}}}</text>
 	<view s-for-index="idx" s-for="{{itemRecommends}}">
@@ -41,12 +58,16 @@
 			<image src="{{item.titlepic}}}"></image>
 			<text>{{item.title}}}</text>
 		</view>
-		<view hidden='{{isInWeek}}'>
+		<!-- <view hidden='{{!isInWeek}}'>
 			<ad s-if="{{idx==itemRecommends.length-1}}" appid="c346a49a" apid="6543164" class="ad" type="feed"></ad>
-		</view>
-		<view hidden='{{!isInWeek}}'>
-			<ad s-if="{{idx==itemRecommends.length-1}}" appid="c346a49a" apid="6543164" class="ad" type="feed"></ad>
-		</view>
+		</view> -->
 	</view>
-
+	<ad appid="c346a49a" apid="6547679" class="ad" type="feed"></ad>
+</view>
+<view>
+	<view class="interaction-cutLine"></view>
+	<view class="interaction-component" ">
+		<smt-interaction  s-if="{{isParamOk}}" comment-param="{{commentParam}}" bindunlogin="getOpenid">
+		</smt-interaction>
+	</view>
 </view>

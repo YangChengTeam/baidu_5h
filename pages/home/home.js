@@ -29,14 +29,14 @@ Page({
             //     path: "/pages/list/list",
             //     name: "美体",
             // }, 
-                {
+            {
                 path: "/pages/list/list",
                 name: "恋爱",
-            }, 
+            },
             {
                 path: "/pages/list/list",
                 name: "婚姻",
-            }, 
+            },
             {
                 path: "/pages/list/list",
                 name: "服饰",
@@ -79,20 +79,20 @@ Page({
         console.log("home onLoad");
         this.showMyLoading();
         this.getHomeData();
+        this.showMyFavoriteGuide();
     },
     onReady() {
     },
     onShow() {
     },
     showMyLoading: function () {
-        console.log("showMyLoading");
         console.log("showMyLoading isOneLoading", this.data.isOneLoading);
         if (this.data.isOneLoading) {
             swan.showLoading({
                 title: '页面加载中...',
                 mask: true,
                 success: function () {
-                    this.data.isOneLoading = false;
+                    // this.data.isOneLoading = false;
                 },
                 fail: function (err) {
                     console.log('showLoading fail', err);
@@ -130,9 +130,20 @@ Page({
         });
     },
     loadMore: function () {
-
         this.data.pageNum++;
         this.getHomeData();
+    },
+    showMyFavoriteGuide: function () {
+        swan.showFavoriteGuide({
+            type: 'bar',
+            content: '一键关注小程序',
+            success: res => {
+                console.log('关注成功：', res);
+            },
+            fail: err => {
+                console.log('关注失败：', err);
+            }
+        })
     },
     getHomeData: function () {
         var that = this;
@@ -149,7 +160,7 @@ Page({
             },
             success: function (res) {
                 swan.hideLoading();
-                console.log(res.data);
+                console.log("getHomeData res.data", res.data);
 
                 if (res.data == null) {
                     if (that.data.pageNum == 1) {
@@ -166,27 +177,25 @@ Page({
                 }
 
                 that.data.itemNews = that.data.itemNews.concat(res.data.news);
+
                 that.setData({
                     itemNews: that.data.itemNews,
                     itemBanners: res.data.banner,
                 })
-
                 if (titlepics.length == 0) {
-                    for (itemNew of res.data.news) {
+                    for (var itemNew of res.data.news) {
                         const titlepic = itemNew.titlepic;
                         titlepics.push(titlepic)
                     }
                     that.setPageInfoData(titlepics, res.data.site)
                 }
-
-
-
                 if (res.data.news == null || res.data.news.length < 6) {
                     that.setData({
                         loading: "没有更多了",
                     })
                 };
             },
+
             fail: function (err) {
                 console.log('错误码：' + err.errCode);
                 console.log('错误信息：' + err.errMsg);
@@ -203,6 +212,7 @@ Page({
                 // console.log('setPageInfo success sites.title: ' + sites.title);
             },
             fail: function (err) {
+                // console.log('setPageInfo fail', err);
                 console.log('setPageInfo fail', err);
             }
         })

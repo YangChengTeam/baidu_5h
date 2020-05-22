@@ -8,6 +8,7 @@ Page({
         id: "",
         title: "",
         writer: "",
+        newDate: "",
         column: "",
         recommendTitle: "",
         relatedTitle: "",
@@ -17,6 +18,15 @@ Page({
         ellipsis: true, // 文字是否收起，默认收起
         isBindEllipsis: false,
         isInWeek: true,
+        isParamOk: false,
+        isShowSkeleton: false,
+        commentParam: {
+            openid: '',
+            snid: '',
+            path: '',
+            title: '测试文章标题',
+            content: '测试文章内容'
+        }
     },
     /**
    * 收起/展开按钮点击事件
@@ -30,25 +40,35 @@ Page({
     },
     onLoad(res) {
         this.data.id = res.id;
-        // this.data.title = res.title;
-        var titleData = res.title;
-        if (titleData == null || undefined==titleData) {
-            titleData = "加载中..."
-        }
-        this.setData({
-            title: titleData,
-        })
+
+        // console.log("snid2", this.data.commentParam.snid)
+        // console.log("path2", this.data.commentParam.path)
+        console.log("commentParam", this.data.commentParam)
+        //  this.data.commentParam.isParamOk=true
+
         this.showMyLoading();
         this.getCmsmainData();
+        this.showMyFavoriteGuide();
 
-        // 当前时间戳
-        // var timestamp = Date.parse(new Date());
-        // console.log("timestamp", timestamp);
+
+        this.getOpenid()
 
     },
     onReady() {
     },
     onShow() {
+    },
+    showMyFavoriteGuide: function () {
+        swan.showFavoriteGuide({
+            type: 'bar',
+            content: '一键关注小程序',
+            success: res => {
+                console.log('关注成功：', res);
+            },
+            fail: err => {
+                console.log('关注失败：', err);
+            }
+        })
     },
     swiperChange(e) {
         console.log('swiperChange:', e);
@@ -101,19 +121,35 @@ Page({
                 }
                 var contentData = base64.base64_decode(res.data.content);
                 // console.log(contentData);
-                console.log("res.data.inWeek ", res.data.inWeek);
+                console.log("res.data.inWeek ", res.data.inWeek == 0 || false);
+
+                // 当前时间戳
+                var newstimeOut = res.data.newstime * 1000 + 1209600000  //新闻两周过期
+                var currenttimes = Date.parse(new Date());   //当前时间戳
+                console.log("time  stamp", currenttimes);
+                console.log("newstimeNum", newstimeOut)
+                if (newstimeOut > currenttimes) {
+                    that.setData({
+                        ellipsis: false,
+                        isBindEllipsis: true,
+                    })
+                }
+
                 that.setData({
                     content: bdParse.bdParse('article', 'html', contentData, that, 5),
                     title: res.data.title,
                     column: res.data.column,
                     writer: res.data.writer,
+                    newDate: res.data.time.substring(0, 10),
                     itemRecommends: res.data.list,
+                    itemRelated: res.data.list2,
                     recommendTitle: "更多推荐",
                     relatedTitle: "猜你喜欢",
-                    isInWeek: res.data.inWeek == 0,
+                    isInWeek: res.data.inWeek == 0 || false,
+                    //   imageSkeleton:"1",
+                    isShowSkeleton: true,
                 })
                 swan.setPageInfo({
-                    // title: 'pages/cmsmain/cmsmain',
                     title: res.data.title,
                     keywords: res.data.keywords,
                     description: res.data.description,
@@ -144,4 +180,46 @@ Page({
             url: '/pages/cmsmain/cmsmain?id=' + id + '&title=' + title,
         });
     },
+    getOpenid() {
+        swan.login({
+            success: res => {
+                swan.request({
+                    url: 'https://spapi.baidu.com/oauth/jscode2sessionkey',
+                    method: 'POST',
+                    header: {
+                        'content-type': 'application/x-www-form-urlencoded'
+                    },
+                    data: {
+                        code: res.code,
+                        // client_id = AppKey, sk = AppSecret
+                        // client_id: '你的AppKey', // eslint-disable-line
+                        //  sk: '你的AppSecret'
+                        client_id: 'OBjgupux7OxplyprS6M5I1HGwxYsjOry', // eslint-disable-line
+                        sk: '1RKFXv3kCgq8itAR8ItYpQ3Xq7GoPGzK'
+                    },
+                    success: res => {
+                        var that = this
+                        console.log("getOpenid res ", res)
+                        if (res.statusCode == 200) {
+                            // 这里是使用获取到的用户openid
+                            this.setData('commentParam.openid', res.data.openid);
+                            this.setData('commentParam.snid', that.data.id);
+                            this.setData('commentParam.path', '/extensions/component/smt-interaction/smt-interaction?snid=' + that.data.id);
+                            //                      this.data.commentParam.snid = res.id;
+                            // this.data.commentParam.path = '/extensions/component/smt-interaction/smt-interaction?snid=' + res.id;
+                            console.log("commentParam2 ", this.data.commentParam)
+
+                            this.setData('isParamOk', true);
+                            // this.data.commentParam.isParamOk=true
+                        }
+                    },
+                    fail: function (err) {
+                        console.log('getOpenid fail', err);
+                    }
+                });
+            }, fail: function (err) {
+                console.log('getOpenid fail 222', err);
+            }
+        });
+    }
 })

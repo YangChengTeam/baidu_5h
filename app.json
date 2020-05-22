@@ -1,10 +1,10 @@
 {
     "pages": [
-        
         "pages/home/home",
         "pages/list/list",
-          "pages/cmsmain/cmsmain",
-        "pages/search/search"
+        "pages/cmsmain/cmsmain",
+        "pages/search/search",
+        "swan-sitemap/index/index"
     ],
     "window": {
         "navigationBarBackgroundColor": "#ffffff",
@@ -12,5 +12,15 @@
         "navigationBarTitleText": "智能小程序",
         "backgroundTextStyle": "light"
     },
-       "prefetches": ["https://api.5h.com/baiduApi.php?action=detail&id=${id}"]
+    "dynamicLib": {
+        "swan-sitemap-lib": {
+            "provider": "swan-sitemap"
+        },
+        "myDynamicLib": {
+            "provider": "smart-sc"
+        }
+    },
+    "prefetches": [
+        "https://api.5h.com/baiduApi.php?action=detail&id=${id}"
+    ]
 }

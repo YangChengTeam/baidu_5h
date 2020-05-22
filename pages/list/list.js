@@ -26,7 +26,7 @@ Page({
     onShow() {
     },
     gotomain(res) {
-        console.log(res)
+        console.log("gotomain --- ", res)
         var id = res.currentTarget.dataset.item.id;
         var title = res.currentTarget.dataset.item.title;
         swan.navigateTo({
@@ -81,7 +81,7 @@ Page({
                 })
 
                 // if (titlepics.length == 0) {
-                for (itemNew of res.data.list) {
+                for (var itemNew of res.data.list) {
                     const titlepic = itemNew.titlepic;
                     titlepics.push(titlepic)
                 }
@@ -104,7 +104,7 @@ Page({
     },
     getNavDatas: function () {
         var that = this;
-        console.log("http", `url=${config.apiList.baseUrl} action=${"search"} cate_id=${that.data.pageNumber} page=${that.data.pageNum}`)
+        console.log("http getNavDatas ", `url=${config.apiList.baseUrl} action=${"cate"} cate_id=${that.data.pageNumber} page=${that.data.pageNum}`)
         swan.request({
             url: config.apiList.baseUrl,
             method: 'GET',
@@ -116,6 +116,9 @@ Page({
             },
             success: function (res) {
                 console.log("http", "getNavDatas", res.data);
+                // itemLists.push(res.data)
+                // res.data=res.data.concat(res.data)
+                //   console.log("http", "getNavDatas", res.data.size);
 
                 if (res.data == null) {
                     if (that.data.pageNum == 1) {
@@ -135,7 +138,7 @@ Page({
                 })
 
                 // if (titlepics.length == 0) {
-                for (itemNew of res.data.list) {
+                for (var itemNew of res.data.list) {
                     const titlepic = itemNew.titlepic;
                     titlepics.push(titlepic)
                 }
@@ -143,11 +146,12 @@ Page({
                 that.setPageInfoData(titlepics, res.data.site)
                 // }
 
-                if (listData == null || res.data.list.length < 10) {
-                    that.setData({
-                        loading: "没有更多了",
-                    })
-                };
+                // config.log("res.data.list.length",res.data.list.length)
+                // if (res.data.list == null || res.data.list.length < 10) {
+                //     that.setData({
+                //         loading: "没有更多了",
+                //     })
+                // };
             },
             fail: function (err) {
                 console.log('错误码：' + err.errCode);

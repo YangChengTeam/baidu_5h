@@ -34,17 +34,17 @@ Component({
             //     name: "美体",
             //     pageNumber: 20
             // },
-                {
+            {
                 path: "/pages/list/list",
                 name: "恋爱",
                 pageNumber: 142
             },
-                {
+            {
                 path: "/pages/list/list",
                 name: "婚姻",
                 pageNumber: 143
             },
-             {
+            {
                 path: "/pages/list/list",
                 name: "服饰",
                 pageNumber: 32
@@ -67,7 +67,7 @@ Component({
         var name = res.currentTarget.dataset.nav.name;
         var pageNumber = res.currentTarget.dataset.nav.pageNumber;
         swan.redirectTo({
-        // swan.redirectTo({
+            // swan.redirectTo({
             url: path + '?path=' + path + '&pageName=' + name + '&pageNumber=' + pageNumber,
             success: function () {
                 console.log('redirectTo success');
@@ -79,10 +79,11 @@ Component({
     },
     //跳转搜索,如果是搜索页面，则不跳转
     gotosearch(res) {
-        console.log(this.data.pageName)
+        console.log("nav pageName ", this.data.pageName)
         if (this.data.pageName != '搜索') {
             swan.navigateTo({
                 url: '/pages/search/search'
+                // url: '/swan-sitemap/index/index?currentPage=1',
             });
         }
     },
