@@ -75,11 +75,14 @@ Page({
         loading: "加载中...",
         isOneLoading: true,
     },
-    onLoad() { // 监听页面加载的生命周期函数
-        console.log("home onLoad");
+    onInit() {
+        console.log("00671", "onInit")
         this.showMyLoading();
         this.getHomeData();
         this.showMyFavoriteGuide();
+    },
+    onLoad() { // 监听页面加载的生命周期函数
+        console.log("00671", "onLoad")
     },
     onReady() {
     },
@@ -204,7 +207,9 @@ Page({
     },
     setPageInfoData(titlepics, sites) {
         swan.setPageInfo({
-            title: sites.title,
+          title: sites.title != undefined && sites.title != null,
+        //   title: sites.title != null && sites.title != undefined,
+            // title: sites.title,
             image: titlepics,
             keywords: sites.sitekey,
             description: sites.siteintro,

@@ -1,49 +1,46 @@
 {
     "editor": {
-        "curPath": "D:\\baidu\\201911\\baidu_5h\\pages\\cmsmain\\cmsmain.swan",
+        "curPath": "D:\\baidu\\201911\\baidu_5h\\pages\\list\\list.js",
         "expands": [
-            "D:\\baidu\\201911\\baidu_5h\\components\\nav",
-            "D:\\baidu\\201911\\baidu_5h\\swan-sitemap\\index",
-            "D:\\baidu\\201911\\baidu_5h\\pages\\s\\aojo",
-            "D:\\baidu\\201911\\baidu_5h\\pages\\s\\clz",
-            "D:\\baidu\\201911\\baidu_5h\\pages\\search",
+            "D:\\baidu\\201911\\baidu_5h\\pages",
             "D:\\baidu\\201911\\baidu_5h\\pages\\cmsmain",
             "D:\\baidu\\201911\\baidu_5h\\pages\\home",
-            "D:\\baidu\\201911\\baidu_5h\\images",
-            "D:\\baidu\\201911\\baidu_5h\\pages",
-            "D:\\baidu\\201911\\baidu_5h\\pages\\list"
+            "D:\\baidu\\201911\\baidu_5h\\pages\\list",
+            "D:\\baidu\\201911\\baidu_5h\\pages\\search",
+            "D:\\baidu\\201911\\baidu_5h\\bdparse",
+            "D:\\baidu\\201911\\baidu_5h\\bdparse\\bdParse"
         ],
         "markdownUploadTimeMap": {},
         "paths": [
-            "D:\\baidu\\201911\\baidu_5h\\pages\\cmsmain\\cmsmain.css",
-            "D:\\baidu\\201911\\baidu_5h\\pages\\cmsmain\\cmsmain.swan",
-            "D:\\baidu\\201911\\baidu_5h\\pages\\cmsmain\\cmsmain.js",
-            "search",
-            "D:\\baidu\\201911\\baidu_5h\\pages\\home\\home.js",
-            "D:\\baidu\\201911\\baidu_5h\\pages\\home\\home.swan",
-            "D:\\baidu\\201911\\baidu_5h\\pages\\list\\list.js"
-        ],
-        "recentlyFiles": [
-            "D:\\baidu\\201911\\baidu_5h\\pages\\cmsmain\\cmsmain.swan",
-            "D:\\baidu\\201911\\baidu_5h\\pages\\cmsmain\\cmsmain.css",
-            "D:\\baidu\\201911\\baidu_5h\\pages\\cmsmain\\cmsmain.js",
+            "D:\\baidu\\201911\\baidu_5h\\pages\\list\\list.swan",
+            "D:\\baidu\\201911\\baidu_5h\\pages\\list\\list.css",
             "D:\\baidu\\201911\\baidu_5h\\pages\\list\\list.js",
             "D:\\baidu\\201911\\baidu_5h\\pages\\home\\home.swan",
-            "D:\\baidu\\201911\\baidu_5h\\images\\cmsmain_Skeleton.png",
+            "D:\\baidu\\201911\\baidu_5h\\pages\\home\\home.css",
+            "search",
+            "D:\\baidu\\201911\\baidu_5h\\pages\\home\\home.js"
+        ],
+        "recentlyFiles": [
+            "D:\\baidu\\201911\\baidu_5h\\pages\\list\\list.js",
             "D:\\baidu\\201911\\baidu_5h\\pages\\home\\home.js",
+            "D:\\baidu\\201911\\baidu_5h\\pages\\list\\list.swan",
+            "D:\\baidu\\201911\\baidu_5h\\pages\\list\\list.css",
+            "D:\\baidu\\201911\\baidu_5h\\pages\\home\\home.css",
+            "D:\\baidu\\201911\\baidu_5h\\pages\\home\\home.swan",
+            "D:\\baidu\\201911\\baidu_5h\\pages\\list\\list.json",
+            "D:\\baidu\\201911\\baidu_5h\\bdparse\\bdParse\\html2json.js",
+            "D:\\baidu\\201911\\baidu_5h\\app.js",
+            "D:\\baidu\\201911\\baidu_5h\\pages\\search\\search.js",
+            "D:\\baidu\\201911\\baidu_5h\\pages\\cmsmain\\cmsmain.js",
+            "D:\\baidu\\201911\\baidu_5h\\pages\\home\\home.json",
+            "D:\\baidu\\201911\\baidu_5h\\pages\\cmsmain\\cmsmain.swan",
+            "D:\\baidu\\201911\\baidu_5h\\pages\\cmsmain\\cmsmain.css",
+            "D:\\baidu\\201911\\baidu_5h\\images\\cmsmain_Skeleton.png",
             "D:\\baidu\\201911\\baidu_5h\\pages\\cmsmain\\cmsmain.json",
             "D:\\baidu\\201911\\baidu_5h\\app.json",
             "D:\\baidu\\201911\\baidu_5h\\pages\\search\\search.swan",
             "D:\\baidu\\201911\\baidu_5h\\pages\\search\\search.css",
-            "D:\\baidu\\201911\\baidu_5h\\pages\\home\\home.json",
-            "D:\\baidu\\201911\\baidu_5h\\pages\\home\\home.css",
-            "D:\\baidu\\201911\\baidu_5h\\components\\nav\\nav.js",
-            "D:\\baidu\\201911\\baidu_5h\\swan-sitemap\\index\\index.js",
-            "D:\\baidu\\201911\\baidu_5h\\app.js",
-            "D:\\baidu\\201911\\baidu_5h\\bdparse\\bdParse\\html2json.js",
-            "D:\\baidu\\201911\\baidu_5h\\swan-sitemap\\index\\index.swan",
-            "D:\\baidu\\201911\\baidu_5h\\pages\\search\\search.js",
-            "D:\\baidu\\201911\\baidu_5h\\swan-sitemap\\index\\index.css"
+            "D:\\baidu\\201911\\baidu_5h\\components\\nav\\nav.js"
         ]
     }
 }

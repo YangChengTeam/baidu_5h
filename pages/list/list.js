@@ -15,13 +15,16 @@ Page({
         showBackTop: false,
         loading: "加载中...",
     },
-    onLoad(res) {
+    onInit(res) {
         this.setData({
             pageName: res.pageName,
             pageNumber: res.pageNumber,
             keyword: res.keyword,
         }),
             this.getListDatas();
+    },
+    onLoad(res) {
+
     },
     onShow() {
     },
@@ -74,27 +77,22 @@ Page({
                         })
                     }
                 }
-
-                that.data.itemLists = that.data.itemLists.concat(res.data.list);
-                that.setData({
-                    itemLists: that.data.itemLists,
-                })
-
-                // if (titlepics.length == 0) {
-                for (var itemNew of res.data.list) {
-                    const titlepic = itemNew.titlepic;
-                    titlepics.push(titlepic)
+                if (res && res.data && res.data.list) {
+                    that.data.itemLists = that.data.itemLists.concat(res.data.list);
+                    that.setData({
+                        itemLists: that.data.itemLists,
+                    })
+                    for (var itemNew of res.data.list) {
+                        const titlepic = itemNew.titlepic;
+                        titlepics.push(titlepic)
+                    }
+                    that.setPageInfoData(titlepics, res.data.site)
                 }
-                console.log(789, titlepics)
-                that.setPageInfoData(titlepics, res.data.site)
-                // }
-
-                if (res.data.list == null || res.data.list.length < 10) {
+                if (!res || !res.data || !res.data.list || res.data.list.length < 10) {
                     that.setData({
                         loading: "没有更多了",
                     })
                 };
-
             },
             fail: function (err) {
                 console.log('错误码：' + err.errCode);
@@ -116,6 +114,7 @@ Page({
             },
             success: function (res) {
                 console.log("http", "getNavDatas", res.data);
+                console.log("00671", "length " + that.data.itemLists.length)
                 // itemLists.push(res.data)
                 // res.data=res.data.concat(res.data)
                 //   console.log("http", "getNavDatas", res.data.size);
@@ -131,13 +130,14 @@ Page({
                         })
                     }
                 }
+                if (res.data != null && res.data != undefined && res.data.list != null && res.data.list != undefined) {
+                    that.data.itemLists = that.data.itemLists.concat(res.data.list);
+                    that.setData({
+                        itemLists: that.data.itemLists,
+                    })
+                }
 
-                that.data.itemLists = that.data.itemLists.concat(res.data.list);
-                that.setData({
-                    itemLists: that.data.itemLists,
-                })
-
-                // if (titlepics.length == 0) {
+                // if (titlepics.length == 0 11) {
                 for (var itemNew of res.data.list) {
                     const titlepic = itemNew.titlepic;
                     titlepics.push(titlepic)
@@ -160,11 +160,19 @@ Page({
         });
     },
     setPageInfoData(titlepics, sites) {
+        var title = this.data.keyword;
+        var keywords = this.data.keyword;
+        var description = this.data.keyword;
+        if (sites != null && sites != undefined) {
+            title = sites.title;
+            keywords = sites.sitekey;
+            description = sites.siteintro;
+        }
         swan.setPageInfo({
-            title: sites.title,
             image: titlepics,
-            keywords: sites.sitekey || this.data.keyword,
-            description: sites.siteintro,
+            title: title,
+            keywords: keywords,
+            description: description,
             success: function () {
                 console.log('setPageInfo success sites.title: ' + sites.title + " keywords :" + sites.sitekey || this.data.keyword);
             },

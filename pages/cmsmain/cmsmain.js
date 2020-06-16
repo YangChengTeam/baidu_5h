@@ -38,20 +38,17 @@ Page({
             isBindEllipsis: true
         })
     },
-    onLoad(res) {
+    onInit(res) {
         this.data.id = res.id;
 
-        // console.log("snid2", this.data.commentParam.snid)
-        // console.log("path2", this.data.commentParam.path)
         console.log("commentParam", this.data.commentParam)
-        //  this.data.commentParam.isParamOk=true
-
         this.showMyLoading();
         this.getCmsmainData();
         this.showMyFavoriteGuide();
 
-
         this.getOpenid()
+    },
+    onLoad(res) {
 
     },
     onReady() {

@@ -7,10 +7,13 @@ Page({
         keyword: "", //搜索关键词
         hotsearchData: [],//热门搜索
     },
+    onInit(res) {
+        this.getHotData();
+    },
     onLoad(res) {
         // 监听页面加载的生命周期函数
 
-        this.getHotData();
+
     },
     onShow() {
         swan.setPageInfo({
@@ -66,7 +69,7 @@ Page({
                 })
             },
             fail: function (err) {
-         
+
                 console.log('错误码：' + err.errCode);
                 console.log('错误信息：' + err.errMsg);
             }
