@@ -21,14 +21,6 @@ Page({
                 path: "/pages/list/list",
                 name: "彩妆",
             },
-            // {
-            //     path: "/pages/list/list",
-            //     name: "整形",
-            // },
-            // {
-            //     path: "/pages/list/list",
-            //     name: "美体",
-            // }, 
             {
                 path: "/pages/list/list",
                 name: "恋爱",
@@ -95,7 +87,6 @@ Page({
                 title: '页面加载中...',
                 mask: true,
                 success: function () {
-                    // this.data.isOneLoading = false;
                 },
                 fail: function (err) {
                     console.log('showLoading fail', err);
@@ -167,14 +158,8 @@ Page({
 
                 if (res.data == null) {
                     if (that.data.pageNum == 1) {
-                        // that.setData({
-                        //     loading: "没有数据",
-                        // })
                         that.setData('loading', "没有数据");
                     } else {
-                        // that.setData({
-                        //     loading: "没有更多了",
-                        // })
                         that.setData('loading', "没有更多了");
                     }
                 }
@@ -208,16 +193,12 @@ Page({
     setPageInfoData(titlepics, sites) {
         swan.setPageInfo({
           title: sites.title != undefined && sites.title != null,
-        //   title: sites.title != null && sites.title != undefined,
-            // title: sites.title,
             image: titlepics,
             keywords: sites.sitekey,
             description: sites.siteintro,
             success: function () {
-                // console.log('setPageInfo success sites.title: ' + sites.title);
             },
             fail: function (err) {
-                // console.log('setPageInfo fail', err);
                 console.log('setPageInfo fail', err);
             }
         })

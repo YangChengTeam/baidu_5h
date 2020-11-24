@@ -8,9 +8,9 @@
 		<view class="m-list-cont2" s-if="{{(idx+1)%6==0}}">
 			<ad appid="c346a49a" apid="7044162" class="ad" type="feed"></ad>
 		</view>
-        <view class="m-list-cont2" s-if="{{idx+1==itemLists.length}}">
-		<ad appid="c346a49a" apid="7044162" class="ad" type="feed" ></ad>
-        </view>
+		<view class="m-list-cont2" s-if="{{idx+1==itemLists.length}}">
+			<ad appid="c346a49a" apid="7044162" class="ad" type="feed"></ad>
+		</view>
 	</block>
 
 </view>

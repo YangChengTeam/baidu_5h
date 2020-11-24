@@ -19,21 +19,16 @@ Component({
                 name: "护肤",
                 pageNumber: 17
             },
+            // {
+            //     path: "/pages/list/list",
+            //     name: "亲子",
+            //     pageNumber: 2
+            // },
             {
                 path: "/pages/list/list",
                 name: "彩妆",
                 pageNumber: 18
             },
-            // {
-            //     path: "/pages/list/list",
-            //     name: "整形",
-            //     pageNumber: 19
-            // },
-            // {
-            //     path: "/pages/list/list",
-            //     name: "美体",
-            //     pageNumber: 20
-            // },
             {
                 path: "/pages/list/list",
                 name: "恋爱",
@@ -53,6 +48,16 @@ Component({
                 name: "发型",
                 pageNumber: 129
             },
+                       // {
+            //     path: "/pages/list/list",
+            //     name: "整形",
+            //     pageNumber: 19
+            // },
+            // {
+            //     path: "/pages/list/list",
+            //     name: "美体",
+            //     pageNumber: 20
+            // },
         ],
 
     },

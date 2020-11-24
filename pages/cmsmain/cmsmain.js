@@ -22,10 +22,9 @@ Page({
         isShowSkeleton: false,
         commentParam: {
             openid: '',
-            snid: '',
+            snid: '190707',
             path: '',
             title: '测试文章标题',
-            content: '测试文章内容'
         }
     },
     /**
@@ -41,7 +40,6 @@ Page({
     onInit(res) {
         this.data.id = res.id;
 
-        console.log("commentParam", this.data.commentParam)
         this.showMyLoading();
         this.getCmsmainData();
         this.showMyFavoriteGuide();
@@ -75,7 +73,6 @@ Page({
             title: '页面加载中...',
             mask: true,
             success: function () {
-                // console.log('showLoading success');
             },
             fail: function (err) {
                 console.log('showLoading fail', err);
@@ -97,7 +94,7 @@ Page({
                 // id: 159720,
             },
             success: function (res) {
-                console.log("data", res.data);
+                console.log("netData data", res.data);
                 if (res.data == null || res.data.content == null) {
                     console.log("没有数据，返回上级页面");
 
@@ -119,6 +116,7 @@ Page({
                 var contentData = base64.base64_decode(res.data.content);
                 // console.log(contentData);
                 console.log("res.data.inWeek ", res.data.inWeek == 0 || false);
+                console.log("res.data", res.data);
 
                 // 当前时间戳
                 var newstimeOut = res.data.newstime * 1000 + 1209600000  //新闻两周过期
@@ -131,9 +129,9 @@ Page({
                         isBindEllipsis: true,
                     })
                 }
-
+                var contentString = bdParse.bdParse('article', 'html', contentData, that, 5);
                 that.setData({
-                    content: bdParse.bdParse('article', 'html', contentData, that, 5),
+                    content: contentString,
                     title: res.data.title,
                     column: res.data.column,
                     writer: res.data.writer,
@@ -143,9 +141,16 @@ Page({
                     recommendTitle: "更多推荐",
                     relatedTitle: "猜你喜欢",
                     isInWeek: res.data.inWeek == 0 || false,
-                    //   imageSkeleton:"1",
                     isShowSkeleton: true,
+                    commentParam: {
+                        title: res.data.title,
+
+                        openid: that.data.commentParam.openid,
+                        snid: that.data.commentParam.snid,
+                        path: that.data.commentParam.path,
+                    }
                 })
+                console.log("commentParam233", that.data.commentParam)
                 swan.setPageInfo({
                     title: res.data.title,
                     keywords: res.data.keywords,
@@ -153,19 +158,20 @@ Page({
                     comments: res.data.comments,
                     image: res.data.images,
                     success: function () {
-                        // console.log('setPageInfo success');
                     },
                     fail: function (err) {
                         console.log('setPageInfo fail', err);
                     }
                 })
                 swan.hideLoading();
+
             },
             fail: function (err) {
                 console.log('错误码：' + err.errCode);
                 console.log('错误信息：' + err.errMsg);
             }
         });
+
     },
     gotomain(res) {
         console.log(res)
@@ -173,7 +179,6 @@ Page({
         var id = res.currentTarget.dataset.item.id;
         var title = res.currentTarget.dataset.item.title;
         swan.navigateTo({
-            // url: '/pages/cmsmain/cmsmain?id=' + id,
             url: '/pages/cmsmain/cmsmain?id=' + id + '&title=' + title,
         });
     },
@@ -196,18 +201,22 @@ Page({
                     },
                     success: res => {
                         var that = this
-                        console.log("getOpenid res ", res)
+                        console.log("netData getOpenid res ", res)
                         if (res.statusCode == 200) {
                             // 这里是使用获取到的用户openid
-                            this.setData('commentParam.openid', res.data.openid);
-                            this.setData('commentParam.snid', that.data.id);
-                            this.setData('commentParam.path', '/extensions/component/smt-interaction/smt-interaction?snid=' + that.data.id);
-                            //                      this.data.commentParam.snid = res.id;
-                            // this.data.commentParam.path = '/extensions/component/smt-interaction/smt-interaction?snid=' + res.id;
-                            console.log("commentParam2 ", this.data.commentParam)
+                            that.setData({
+                                commentParam: {
+                                    openid: res.data.openid,
+                                    snid: that.data.id,
+                                    path: '/extensions/component/smt-interaction/smt-interaction?snid=' + that.data.id,
 
-                            this.setData('isParamOk', true);
-                            // this.data.commentParam.isParamOk=true
+                                    title: that.data.commentParam.title,
+                                },
+                                isParamOk:true,
+                            });
+                            console.log("commentParam2 ", that.data.commentParam)
+                            console.log("isParamOk ", that.data.isParamOk)
+                            // this.setData('isParamOk', true);
                         }
                     },
                     fail: function (err) {

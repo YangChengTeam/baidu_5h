@@ -16,9 +16,19 @@ Page({
         loading: "加载中...",
     },
     onInit(res) {
+        var pageNumberString = res.pageNumber;
+         var pageNameString = res.pageName;
+        if (pageNumberString == 1 || pageNumberString == 4) {
+            pageNumberString = 17
+            pageNameString="护肤"
+        }else if(pageNumberString == 2||pageNumberString == 3 ){
+            pageNumberString = 18
+            pageNameString="彩妆"
+        }
+        console.log("pageName ", res.pageName + " pageNumber " + res.pageNumber + " keyword " + res.keyword)
         this.setData({
-            pageName: res.pageName,
-            pageNumber: res.pageNumber,
+            pageName: pageNameString,
+            pageNumber: pageNumberString,
             keyword: res.keyword,
         }),
             this.getListDatas();
@@ -113,12 +123,6 @@ Page({
                 page: that.data.pageNum
             },
             success: function (res) {
-                console.log("http", "getNavDatas", res.data);
-                console.log("00671", "length " + that.data.itemLists.length)
-                // itemLists.push(res.data)
-                // res.data=res.data.concat(res.data)
-                //   console.log("http", "getNavDatas", res.data.size);
-
                 if (res.data == null) {
                     if (that.data.pageNum == 1) {
                         that.setData({
@@ -137,21 +141,11 @@ Page({
                     })
                 }
 
-                // if (titlepics.length == 0 11) {
                 for (var itemNew of res.data.list) {
                     const titlepic = itemNew.titlepic;
                     titlepics.push(titlepic)
                 }
-                console.log(456, titlepics)
                 that.setPageInfoData(titlepics, res.data.site)
-                // }
-
-                // config.log("res.data.list.length",res.data.list.length)
-                // if (res.data.list == null || res.data.list.length < 10) {
-                //     that.setData({
-                //         loading: "没有更多了",
-                //     })
-                // };
             },
             fail: function (err) {
                 console.log('错误码：' + err.errCode);
@@ -193,7 +187,6 @@ Page({
     onBackTop() {
         swan.pageScrollTo({
             scrollTop: 0,
-            // duration: 0
         })
     },
     /**
@@ -217,7 +210,6 @@ Page({
             pageNum: 1,
             keyword: res.detail.searchValue,
         })
-        // res.detail.list
 
         if (res.detail == null) {
             that.setData({
