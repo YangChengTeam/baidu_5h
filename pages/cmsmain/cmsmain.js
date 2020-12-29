@@ -85,7 +85,9 @@ Page({
 
     getCmsmainData: function () {
         var that = this;
-        console.log("id:" + that.data.id);
+        console.log("netData id:" + that.data.id);
+        console.log("netData url:" + that.data.id);
+        console.log("netData id:" + that.data.id);
         swan.request({
             url: config.apiList.baseUrl,
             data: {

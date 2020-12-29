@@ -1,4 +1,5 @@
 @import "../../bdParse/bdParse/bdParse.css";
+
 .g-h1 {
     width: 100%;
     height: auto;
@@ -11,6 +12,7 @@
     display: block;
     overflow: hidden;
 }
+
 .g-h2 {
     width: 100%;
     height: auto;
@@ -23,11 +25,13 @@
     display: -webkit-box;
     overflow: hidden;
 }
+
 .g-h2 .u-t1 {
     width: auto;
     display: block;
     overflow: hidden;
 }
+
 .g-h2 .u-t2 {
     width: auto;
     color: #888;
@@ -36,22 +40,27 @@
     overflow: hidden;
     -webkit-box-flex: 1;
 }
+
 .ellipsisImage {
     width: auto;
     height: auto;
 }
+
 .ellipsis {
     height: 1173rpx;
     opacity: 0.75;
 }
+
 .g-skeleton {
     width: 100%;
     height: 750px;
 }
+
 .unellipsis {
     height: auto;
     opacity: 1;
 }
+
 .g-main-box {
     width: 100%;
     line-height: 50rpx;
@@ -67,6 +76,7 @@
     position: relative;
     text-align: justify;
 }
+
 .g-main-box .bdParse-p {
     width: 100%;
     height: auto;
@@ -77,6 +87,7 @@
     display: block;
     overflow: hidden;
 }
+
 .g-main-box .u-bg {
     width: 100%;
     height: 200rpx;
@@ -86,14 +97,14 @@
     left: 0;
     bottom: 0;
     z-index: 1;
-    background: -webkit-gradient(
-        linear,
-        left top,
-        left bottom,
-        color-stop(0, rgba(255, 255, 255, 0)),
-        color-stop(1, rgba(255, 255, 255, 1))
-    ); /*谷歌*/
+    background: -webkit-gradient(linear,
+            left top,
+            left bottom,
+            color-stop(0, rgba(255, 255, 255, 0)),
+            color-stop(1, rgba(255, 255, 255, 1)));
+    /*谷歌*/
 }
+
 .g-main-box .u-bg-ellipsis {
     width: 100%;
     height: 5rpx;
@@ -108,9 +119,19 @@
     display: block;
     overflow: hidden;
 }
+
+.g-recomd-box .u-line {
+    width: 100%;
+    height: 15rpx;
+    display: block;
+    overflow: hidden;
+    background-color: #F5F5F5;
+}
+
 .g-recomd-box .u-h3 {
     width: 100%;
     height: auto;
+    margin-top: 28rpx;
     font-size: 40rpx;
     font-weight: bold;
     color: #000;
@@ -118,6 +139,7 @@
     display: block;
     overflow: hidden;
 }
+
 .g-recomd-box .u-h4 {
     width: 100%;
     height: auto;
@@ -134,31 +156,50 @@
     width: 100%;
     height: auto;
     margin: 10rpx 0 10rpx 0;
-    display: -webkit-box;
+    /* display: -webkit-box; */
+    display: inline;
     overflow: hidden;
-    position: relative;
+    /* position: relative; */
 }
+
+.g-recomd-box .m-cont .m-imag {
+    width: 100%;
+    height: auto;
+    margin: 10rpx 0 45rpx 0;
+    /* display: -webkit-box; */
+    display: flex;
+    overflow: hidden;
+    /* position: relative; */
+    padding: 0 28rpx 0 14rpx;
+    box-sizing: border-box;
+}
+
+
 .g-recomd-box .m-cont image {
     width: 223rpx;
     height: 158rpx;
     display: block;
     overflow: hidden;
-    margin: 15rpx 8rpx 15rpx 34rpx;
+    margin: 0 0 0 14rpx;
+    flex: 1;
 }
+
 .g-recomd-box .m-cont text {
-    width: 100%;
+    width: auto;
     height: auto;
     max-height: 150rpx;
-    padding: 0 35rpx 0 275rpx;
+    padding: 0 0 0 35rpx;
     display: block;
     overflow: hidden;
-    position: absolute;
+    margin: 25rpx 0 25rpx 0;
+    /* position: absolute;
     right: 0;
     top: 50%;
     transform: translateY(-50%);
     box-sizing: border-box;
-    text-align: justify;
+    text-align: justify; */
 }
+
 .ad-container {
     width: 100%;
     height: auto;
@@ -189,6 +230,7 @@
     overflow: hidden;
     position: relative;
 }
+
 .g-main-btn .u-icon {
     width: 14rpx;
     height: 14rpx;
@@ -202,6 +244,7 @@
     top: 10rpx;
     margin: 0 0 0 80rpx;
 }
+
 /* .g-main-btn.f-hover .u-icon {
     transform: rotate(-135deg);
     top: 20rpx;
@@ -215,3 +258,10 @@
     position: relative;
     min-height: 100%;
 } */
+
+
+view {
+    user-select:text !important;
+    -moz-user-select:text !important;
+    -webkit-user-select:text !important;
+}
