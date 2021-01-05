@@ -1,12 +1,12 @@
 /**
- * 
+ *
  * htmlParser改造自: https://github.com/blowsie/Pure-JavaScript-HTML5-Parser
  *
  * github地址: https://github.com/icindy/wxParse
- * 
+ *
  * htmlParser 2次改造自wxParse 20181003
- * 
- * 
+ *
+ *
  * 百度小程序富文本解析
  * 开发者：腾石建站
  * 官网:http://www.tengcee.com
