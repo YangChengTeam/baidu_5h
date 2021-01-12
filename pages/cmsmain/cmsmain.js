@@ -10,22 +10,18 @@ Page({
         writer: "",
         newDate: "",
         column: "",
+        detailsTitle: "",
         recommendTitle: "",
         relatedTitle: "",
-        itemRecommends: [
-
-        ],
+        itemRecommends: [],
+        images: [],
         ellipsis: true, // 文字是否收起，默认收起
         isBindEllipsis: false,
         isInWeek: true,
         isParamOk: false,
         isShowSkeleton: false,
-        commentParam: {
-            openid: '',
-            snid: '190707',
-            path: '',
-            title: '测试文章标题',
-        }
+        commentParam: {},
+        toolbarConfig: {},
     },
     /**
    * 收起/展开按钮点击事件
@@ -44,10 +40,10 @@ Page({
         this.getCmsmainData();
         this.showMyFavoriteGuide();
 
-        this.getOpenid()
+
+
     },
     onLoad(res) {
-
     },
     onReady() {
     },
@@ -82,7 +78,6 @@ Page({
     onHide() {
         swan.hideLoading();
     },
-
     getCmsmainData: function () {
         var that = this;
         console.log("netData id:" + that.data.id);
@@ -117,7 +112,7 @@ Page({
                     return;
                 }
                 var contentData = base64.base64_decode(res.data.content);
-                console.log("contentData ",contentData);
+                console.log("contentData ", contentData);
                 console.log("res.data.inWeek ", res.data.inWeek == 0 || false);
                 console.log("res.data", res.data);
 
@@ -136,6 +131,7 @@ Page({
                 that.setData({
                     content: contentString,
                     title: res.data.title,
+                    images: res.data.images,
                     column: res.data.column,
                     writer: res.data.writer,
                     newDate: res.data.time.substring(0, 10),
@@ -145,15 +141,7 @@ Page({
                     relatedTitle: "猜你喜欢",
                     isInWeek: res.data.inWeek == 0 || false,
                     isShowSkeleton: true,
-                    commentParam: {
-                        title: res.data.title,
-
-                        openid: that.data.commentParam.openid,
-                        snid: that.data.commentParam.snid,
-                        path: that.data.commentParam.path,
-                    }
                 })
-                console.log("commentParam233", that.data.commentParam)
                 swan.setPageInfo({
                     title: res.data.title,
                     keywords: res.data.keywords,
@@ -167,6 +155,8 @@ Page({
                     }
                 })
                 swan.hideLoading();
+
+                that.getOpenid()
 
             },
             fail: function (err) {
@@ -184,6 +174,13 @@ Page({
         swan.navigateTo({
             url: '/pages/cmsmain/cmsmain?id=' + id + '&title=' + title,
         });
+    },
+    onReady() {
+        requireDynamicLib('oneStopInteractionLib').listenEvent();
+    },
+    triggerLogin(e) {
+        console.log("triggerLogin 222333")
+        this.getOpenid()
     },
     getOpenid() {
         swan.login({
@@ -211,11 +208,18 @@ Page({
                                 commentParam: {
                                     openid: res.data.openid,
                                     snid: that.data.id,
-                                    path: '/extensions/component/smt-interaction/smt-interaction?snid=' + that.data.id,
-
-                                    title: that.data.commentParam.title,
+                                    path: '/pages/cmsmain/cmsmain?id=' + that.data.id,
+                                    title: that.data.title,
+                                    images: that.data.images,
                                 },
-                                isParamOk:true,
+                                toolbarConfig: {
+                                    share: {
+                                        title: that.data.title,
+                                    },
+                                    moduleList: ['comment', 'like', 'favor', 'share'],
+                                    placeholder: "回复评论"
+                                },
+                                isParamOk: true,
                             });
                             console.log("commentParam2 ", that.data.commentParam)
                             console.log("isParamOk ", that.data.isParamOk)

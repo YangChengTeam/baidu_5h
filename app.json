@@ -16,8 +16,8 @@
         "swan-sitemap-lib": {
             "provider": "swan-sitemap"
         },
-        "myDynamicLib": {
-            "provider": "smart-sc"
+        "oneStopInteractionLib": {
+            "provider": "swan-interaction"
         }
     },
     "prefetches": [

@@ -43,14 +43,6 @@ Page({
         itemNews: [
         ],
         itemNewsMore: [
-            {
-                title: '小龙虾可以和啤酒一起吃吗 小龙虾的吃法7',
-                titlepic: "https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=2810627290,1080409091&fm=58&s=8197C732C535FA313E526557030030BB&bpow=121&bpoh=75"
-            },
-            {
-                title: '小龙虾可以和啤酒一起吃吗8',
-                titlepic: "https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=2810627290,1080409091&fm=58&s=8197C732C535FA313E526557030030BB&bpow=121&bpoh=75"
-            }
         ],
 
         itemData: {
