@@ -69,7 +69,7 @@
     left: 0;
     right: 0;
     margin: auto;
-    bottom: 1rpx;
+    bottom: 0.01px;
 }
 
 .g-main-box {
