@@ -39,9 +39,6 @@ Page({
         this.showMyLoading();
         this.getCmsmainData();
         this.showMyFavoriteGuide();
-
-
-
     },
     onLoad(res) {
     },
@@ -87,9 +84,7 @@ Page({
             url: config.apiList.baseUrl,
             data: {
                 action: "detail",
-                // id: that.data.id,
                 id: that.data.id,
-                // id: 159720,
             },
             success: function (res) {
                 console.log("netData data", res.data);
@@ -128,6 +123,17 @@ Page({
                     })
                 }
                 var contentString = bdParse.bdParse('article', 'html', contentData, that, 5);
+
+                var recommends= res.data.list
+                for(var index = 0; index < recommends.length; index++){
+                    if (recommends[index].images.length < 2) {
+                        recommends[index].images[1] = recommends[index].images[0]
+                    }
+                    if (recommends[index].images.length < 3) {
+                        recommends[index].images[2] =recommends[index].images[0]
+                    }
+                }
+
                 that.setData({
                     content: contentString,
                     title: res.data.title,
@@ -135,7 +141,7 @@ Page({
                     column: res.data.column,
                     writer: res.data.writer,
                     newDate: res.data.time.substring(0, 10),
-                    itemRecommends: res.data.list,
+                    itemRecommends: recommends,
                     itemRelated: res.data.list2,
                     recommendTitle: "更多推荐",
                     relatedTitle: "猜你喜欢",
@@ -178,10 +184,6 @@ Page({
     onReady() {
         requireDynamicLib('oneStopInteractionLib').listenEvent();
     },
-    triggerLogin(e) {
-        console.log("triggerLogin 222333")
-        this.getOpenid()
-    },
     getOpenid() {
         swan.login({
             success: res => {
@@ -196,7 +198,7 @@ Page({
                         // client_id = AppKey, sk = AppSecret
                         // client_id: '你的AppKey', // eslint-disable-line
                         //  sk: '你的AppSecret'
-                        client_id: 'OBjgupux7OxplyprS6M5I1HGwxYsjOry', // eslint-disable-line
+                        client_id: 'OBjgupux7OxplyprS6M5I1HGwxYsjOry',
                         sk: '1RKFXv3kCgq8itAR8ItYpQ3Xq7GoPGzK'
                     },
                     success: res => {
@@ -223,7 +225,6 @@ Page({
                             });
                             console.log("commentParam2 ", that.data.commentParam)
                             console.log("isParamOk ", that.data.isParamOk)
-                            // this.setData('isParamOk', true);
                         }
                     },
                     fail: function (err) {

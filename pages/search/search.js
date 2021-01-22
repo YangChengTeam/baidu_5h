@@ -16,13 +16,14 @@ Page({
 
     },
     onShow() {
+
         swan.setPageInfo({
             title: 'pages/search/search',
-            // keywords: 'XXXX',  
-            // description: 'XXXXX',  
-            // image: [  
-            //     'XXXXX'  
-            // ]  
+            // keywords: 'XXXX',
+            // description: 'XXXXX',
+            // image: [
+            //     'XXXXX'
+            // ]
         })
     },
     //输入关键词

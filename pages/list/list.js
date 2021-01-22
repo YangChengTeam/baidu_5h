@@ -154,21 +154,14 @@ Page({
         });
     },
     setPageInfoData(titlepics, sites) {
-        var title = this.data.keyword;
-        var keywords = this.data.keyword;
-        var description = this.data.keyword;
-        if (sites != null && sites != undefined) {
-            title = sites.title;
-            keywords = sites.sitekey;
-            description = sites.siteintro;
-        }
+        console.log("sites2 ", sites)
         swan.setPageInfo({
+            title: sites.title,
             image: titlepics,
-            title: title,
-            keywords: keywords,
-            description: description,
+            keywords: sites.sitekey,
+            description: sites.siteintro,
             success: function () {
-                console.log('setPageInfo success sites.title: ' + sites.title + " keywords :" + sites.sitekey || this.data.keyword);
+                console.log('setPageInfo success sites.title: ' + sites.title  + " keywords :" + sites.sitekey || this.data.keyword);
             },
             fail: function (err) {
                 console.log('setPageInfo fail', err);

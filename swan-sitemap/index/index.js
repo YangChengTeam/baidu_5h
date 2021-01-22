@@ -5,20 +5,31 @@ Page({
         listData: [],
         totalPage: 1,
         currentPage: 0,
-        // path: '/swan-sitemap/index/index'
+        path: "/swan-sitemap/index/index",
+        isShowSkeleton: false
     },
 
     onLoad(e) {
-        // let { currentPage } = e;
-        // currentPage = +currentPage || 1;
 
         this.data.currentPage = e.currentPage;
         console.log("onLoad e ", e)
-        console.log("onLoad  e.currentPage ", e.currentPage)
 
-        console.log("onLoad  currentPage ", this.data.currentPage)
-
+        this.showMyLoading();
         this.requestData(this.data.currentPage);
+    },
+    showMyLoading: function () {
+        swan.showLoading({
+            title: '页面载入中...',
+            mask: true,
+            success: function () {
+            },
+            fail: function (err) {
+                console.log('showLoading fail', err);
+            }
+        });
+    },
+    onHide() {
+        swan.hideLoading();
     },
 
     requestData(currentPage) {
@@ -26,29 +37,24 @@ Page({
         var that = this;
         // 发起数据资源请求。
         swan.request({
-            // url: sitemapUrl, // 数据接口，需改为开发者实际的请求接口
-            // url: "https://api.5h.com/baiduApi.php?action=swan",
             url: config.apiList.baseUrl,
             data: {
                 action: "swan",
-                currentPage: currentPage // 参数中需携带页码参数，此为示例，可根据实际情况传入其他所需参数
+                currentPage: currentPage
             },
             success: res => {
                 console.log("success data ", res.data)
+                console.log("success path ", that.data.path)
                 let resData = res.data;
                 console.log("resData resData.currentPage ", resData.currentPage)
-
-                // console.log("resData that.data.currentPage  ----",  resData.currentPage)
-                // console.log("resData that.data.currentPage  ----",  resData.totalPage)
-                // console.log("resData that.data.currentPage  ----",  resData.path)
                 that.setData({
+                    isShowSkeleton:true,
                     listData: resData.list,
                     totalPage: resData.totalPage,
                     currentPage: resData.currentPage,
-                    // path: that.data.path
-                    // path: ""
+                    path:that.data.path
                 });
-                // }
+                swan.hideLoading();
             }
         });
     }

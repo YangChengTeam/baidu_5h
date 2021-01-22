@@ -3,11 +3,11 @@
     "developType": "normal",
     "host": "baiduboxapp",
     "preview": {
-        "packageId": 1353492
+        "packageId": 1374096
     },
     "projectname": "baidu_5h",
     "publish": {
-        "version": "1.0.62.0"
+        "version": "1.0.64.0"
     },
     "setting": {
         "urlCheck": true

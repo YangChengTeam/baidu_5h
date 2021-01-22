@@ -51,6 +51,6 @@
 </view>
 <view>
     <!-- 评论列表组件 -->
-    <comment-list comment-param="{{commentParam}}" toolbar-config="{{toolbarConfig}}" bindunlogin="triggerLogin">
+    <comment-list comment-param="{{commentParam}}" toolbar-config="{{toolbarConfig}}" >
     </comment-list>
 </view>
