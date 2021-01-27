@@ -1,5 +1,5 @@
 {
-    "navigationBarTitleText": "文章详情",
+    "navigationBarTitleText": "5号美人-文章详情",
     "usingSwanComponents": {
         "comment-list": "dynamicLib://oneStopInteractionLib/comment-list"
     }

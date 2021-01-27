@@ -27,9 +27,9 @@ Page({
    * 收起/展开按钮点击事件
    */
     ellipsis: function () {
-        var value = !this.data.ellipsis;
+        // var value = !this.data.ellipsis;
         this.setData({
-            ellipsis: value,
+            ellipsis: false,
             isBindEllipsis: true
         })
     },

@@ -3,19 +3,19 @@
     "developType": "normal",
     "host": "baiduboxapp",
     "preview": {
-        "packageId": 1375886
+        "packageId": 1377469
     },
     "projectname": "baidu_5h",
     "publish": {
-        "version": "1.0.64.0"
+        "version": "1.0.65.0"
     },
     "setting": {
         "urlCheck": true
     },
     "swan": {
         "baiduboxapp": {
-            "extensionJsVersion": "1.15.3",
-            "swanJsVersion": "3.200.116"
+            "swanJsVersion": "3.200.116",
+            "extensionJsVersion": "1.15.3"
         }
     }
 }
