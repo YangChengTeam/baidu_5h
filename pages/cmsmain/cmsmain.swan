@@ -22,9 +22,8 @@
 <view class="g-recomd-box">
     <view class="u-line" />
     <text class="u-h3">{{relatedTitle}}}</text>
-    <ad appid="c346a49a" apid="6481417" class="ad" type="feed"></ad>
-    <ad appid="c346a49a" apid="6482334" class="ad" type="feed"></ad>
-    <!-- <ad appid="c346a49a" apid="6482339" class="ad" type="feed"></ad> -->
+    <ad appid="c346a49a" apid="7408125" class="ad" type="feed"></ad>
+   <ad appid="c346a49a" apid="7408205" class="ad" type="feed" ></ad>
 </view>
 
 
@@ -32,11 +31,7 @@
     <view class="u-line" />
     <text class="u-h3">{{recommendTitle}}}</text>
     <view s-for-index="idx" s-for="{{itemRecommends}}">
-        <!-- <view hidden='{{isInWeek}}'>
-			<ad s-if="{{idx==0}}" appid="c346a49a" apid="6547680" class="ad" type="feed"></ad>
-		</view> -->
-        <ad s-if="{{(idx)%2==0}}" appid="c346a49a" apid="6543160" class="ad" type="feed"></ad>
-        <!-- <ad s-if="{{idx==10}}" appid="c346a49a" apid="6543162" class="ad" type="feed"></ad> -->
+        <ad s-if="{{(idx)%2==0}}"  appid="c346a49a" apid="7408208" class="ad" type="feed" ></ad>
         <view class="m-cont" data-item="{{item}}" bindtap='gotomain'>
             <text>{{item.title}}}</text>
             <view class="m-imag">
@@ -45,14 +40,11 @@
                 <image src="{{item.images[2]}}}"></image>
             </view>
         </view>
-        <!-- <view hidden='{{!isInWeek}}'>
-			<ad s-if="{{idx==itemRecommends.length-1}}" appid="c346a49a" apid="6543164" class="ad" type="feed"></ad>
-		</view> -->
     </view>
-    <ad appid="c346a49a" apid="6547679" class="ad" type="feed"></ad>
+  <ad appid="c346a49a" apid="7408206" class="ad" type="feed" ></ad>
 </view>
 <view>
     <!-- 评论列表组件 -->
-    <comment-list comment-param="{{commentParam}}" toolbar-config="{{toolbarConfig}}" >
+    <comment-list comment-param="{{commentParam}}" toolbar-config="{{toolbarConfig}}">
     </comment-list>
 </view>
