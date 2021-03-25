@@ -8,35 +8,6 @@ var titlepics = []; //setPageInfo 图片容器
 
 Page({
     data: {
-        navData: [
-            {
-                path: "/pages/list/list",
-                name: "推荐"
-            },
-            {
-                path: "/pages/list/list",
-                name: "护肤",
-            },
-            {
-                path: "/pages/list/list",
-                name: "彩妆",
-            },
-            {
-                path: "/pages/list/list",
-                name: "恋爱",
-            },
-            {
-                path: "/pages/list/list",
-                name: "婚姻",
-            },
-            {
-                path: "/pages/list/list",
-                name: "服饰",
-            }, {
-                path: "/pages/list/list",
-                name: "发型",
-            },
-        ],
         pageName: '推荐',
         itemBanners: [
         ],
@@ -44,10 +15,7 @@ Page({
         ],
         itemNewsMore: [
         ],
-
         itemData: {
-            title: '小龙虾可以和啤酒一起吃吗 小龙虾的吃法7',
-            titlepic: "https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=2810627290,1080409091&fm=58&s=8197C732C535FA313E526557030030BB&bpow=121&bpoh=75"
         },
         pageNum: 1,
         current: 0,
@@ -58,6 +26,42 @@ Page({
         showBackTop: false,
         loading: "加载中...",
         isOneLoading: true,
+        navData: [
+            {
+                path: "/pages/home/home",
+                name: "推荐",
+                pageNumber: 0
+            },
+            {
+                path: "/pages/list/list",
+                name: "护肤",
+                pageNumber: 17
+            },
+            {
+                path: "/pages/list/list",
+                name: "彩妆",
+                pageNumber: 18
+            },
+            {
+                path: "/pages/list/list",
+                name: "恋爱",
+                pageNumber: 142
+            },
+            {
+                path: "/pages/list/list",
+                name: "婚姻",
+                pageNumber: 143
+            },
+            {
+                path: "/pages/list/list",
+                name: "服饰",
+                pageNumber: 32
+            }, {
+                path: "/pages/list/list",
+                name: "发型",
+                pageNumber: 129
+            },
+        ],
     },
     onInit() {
         console.log("00671", "onInit")
@@ -89,20 +93,6 @@ Page({
     swiperChange(e) {
 
     },
-    gotoclass(res) {
-        console.log("gotoclass : " + res)
-        var path = res.currentTarget.dataset.nav.path;
-        var name = res.currentTarget.dataset.nav.name;
-        swan.redirectTo({
-            url: '/pages/list/list?path=' + path + '&name=' + name,
-            success: function () {
-                console.log('redirectTo success');
-            },
-            fail: function (err) {
-                console.log('redirectTo fail', err);
-            }
-        });
-    },
     gotomain(res) {
         console.log("gotomain", res)
         if (res == null || "" == res) {
@@ -132,6 +122,7 @@ Page({
         })
     },
     getHomeData: function () {
+
         var that = this;
         swan.request({
             url: config.apiList.baseUrl,
@@ -146,7 +137,8 @@ Page({
             },
             success: function (res) {
                 swan.hideLoading();
-                console.log("getHomeData res.data", res.data);
+                console.log("http 请求", config.apiList.baseUrl + " action:index page:" + that.data.pageNum);
+                console.log("http 响应", res.data);
 
                 if (res.data == null) {
                     if (that.data.pageNum == 1) {
@@ -174,6 +166,7 @@ Page({
                         loading: "没有更多了",
                     })
                 };
+
             },
 
             fail: function (err) {
@@ -183,9 +176,9 @@ Page({
         });
     },
     setPageInfoData(titlepics, sites) {
-        console.log("sites",sites)
+        console.log("setPageInfoData sites", sites)
         swan.setPageInfo({
-          title: sites.title ,
+            title: sites.title,
             image: titlepics,
             keywords: sites.sitekey,
             description: sites.siteintro,
@@ -222,6 +215,81 @@ Page({
                 showBackTop: flag
             })
         }
+    },
+    //跳转频道页面
+    gotoclass(res) {
+        console.log("gotoclass 2 :--- ", res)
+        var path = res.currentTarget.dataset.nav.path;
+        var name = res.currentTarget.dataset.nav.name;
+        var pageNumber = res.currentTarget.dataset.nav.pageNumber;
+        console.log("gotoclass url: ", path + '?path=' + path + '&pageName=' + name + '&pageNumber=' + pageNumber)
+        // swan.redirectTo({
+        swan.navigateTo({
+            url: path + '?path=' + path + '&pageName=' + name + '&pageNumber=' + pageNumber,
+            success: function () {
+                console.log('redirectTo success');
+            },
+            fail: function (err) {
+                console.log('redirectTo fail', err);
+            }
+        });
+    },
+    //跳转搜索,如果是搜索页面，则不跳转
+    gotosearch(res) {
+        console.log("nav pageName ", this.data.pageName)
+        if (this.data.pageName != '搜索') {
+            swan.navigateTo({
+                url: '/pages/search/search'
+                // url: '/swan-sitemap/index/index?currentPage=1',
+            });
+        }
+    },
+    //直接搜索,如果是搜索页面，直接搜索
+    search(res) {
+        this.data.keyword = res.detail.value; //获取搜索关键词
+        if (this.data.pageName == '搜索') {
+            //这里走搜索接口
+            this.getSearchDatas(res.detail.value);
+        }
+    },
+    getSearchDatas: function (searchValue) {
+        var that = this;
+        console.log(`url=${config.apiList.baseUrl} action=${"search"} keyword=${that.data.keyword} page=${that.data.pageNum}`)
+        swan.request({
+            url: config.apiList.baseUrl,
+            method: 'GET',
+            dataType: 'json',
+            data: {
+                action: "search",
+                keyword: searchValue,
+                page: 1
+            },
+            success: function (res) {
+                console.log(res.data)
+                var searchList = [];
+                if (res.data != null && res.data.list != null) {
+                    searchList = res.data.list;
+                }
+                that.sendSearchData(searchValue, searchList);
+            },
+            fail: function (err) {
+                console.log('错误码：' + err.errCode);
+                console.log('错误信息：' + err.errMsg);
+                that.sendSearchData(searchValue);
+            }
+        });
+    },
+    //搜索数据，用于给父级
+    sendSearchData: function (searchValue, searchList) {
+        if (searchList == null) {
+            searchList = []
+        }
+        var searchData = {
+            searchValue: searchValue,
+            label: "",
+            list: searchList,
+        };
+        this.triggerEvent('sendParentSearch', searchData);
     }
 
 })

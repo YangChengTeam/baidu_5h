@@ -78,12 +78,6 @@ function bdParseImgLoad(e) {
 }
 // 假循环获取计算图片视觉最佳宽高
 function calMoreImageInfo(e, idx, that, bindName) {
-
-    console.log("ImageInfo AAA ", e)
-    console.log("ImageInfo", idx)
-    console.log("ImageInfo", that)
-    console.log("ImageInfo", bindName)
-
     var temData = that.data[bindName];
     if (!temData || temData.images.length == 0) {
         return;
@@ -118,16 +112,11 @@ function wxAutoImageCal(originalWidth, originalHeight, that, bindName) {
     windowWidth = realWindowWidth - 2 * padding * 3;
     windowHeight = realWindowHeight;
     //判断按照那种方式进行缩放
-    console.log("windowWidth" + windowWidth);
     if (originalWidth > windowWidth) {//在图片width大于手机屏幕width时候
         autoWidth = windowWidth;
-        console.log("autoWidth" + autoWidth);
-
         autoHeight = (autoWidth * originalHeight) / originalWidth;
-        console.log("autoHeight" + autoHeight);
         results.imageWidth = autoWidth;
         results.imageheight = autoHeight;
-
     } else {//否则展示原来的数据
         results.imageWidth = originalWidth;
         results.imageheight = originalHeight;

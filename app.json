@@ -1,9 +1,9 @@
 {
     "pages": [
         "pages/home/home",
-        "pages/list/list",
         "pages/cmsmain/cmsmain",
         "pages/search/search",
+        "pages/list/list",
         "swan-sitemap/index/index"
     ],
     "window": {

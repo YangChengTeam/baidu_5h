@@ -83,7 +83,7 @@ Page({
             data: {
                 action: "detail",
                 id: that.data.id,
-                // id: 13671,
+                // id: 49382,
             },
             success: function (res) {
                 console.log("netData data", res.data);
@@ -123,13 +123,13 @@ Page({
                 }
                 var contentString = bdParse.bdParse('article', 'html', contentData, that, 5);
 
-                var recommends= res.data.list
-                for(var index = 0; index < recommends.length; index++){
+                var recommends = res.data.list
+                for (var index = 0; index < recommends.length; index++) {
                     if (recommends[index].images.length < 2) {
                         recommends[index].images[1] = recommends[index].images[0]
                     }
                     if (recommends[index].images.length < 3) {
-                        recommends[index].images[2] =recommends[index].images[0]
+                        recommends[index].images[2] = recommends[index].images[0]
                     }
                 }
 
@@ -203,7 +203,10 @@ Page({
                     success: res => {
                         var that = this
                         console.log("netData getOpenid res ", res)
-                        if (res.statusCode == 200) {
+                        if (res.statusCode == 200 && res.data.openid != "undefined") {
+                            if (that.data.title == "undefined") {
+                                that.data.title = "5号美人";
+                            }
                             // 这里是使用获取到的用户openid
                             that.setData({
                                 commentParam: {
@@ -223,7 +226,6 @@ Page({
                                 isParamOk: true,
                             });
                             console.log("commentParam2 ", that.data.commentParam)
-                            console.log("isParamOk ", that.data.isParamOk)
                         }
                     },
                     fail: function (err) {

@@ -1,4 +1,16 @@
-<nav pageName="{{pageName}}"></nav>
+<!-- <nav pageName="{{pageName}}"></nav> -->
+
+<view class="g-search-box">
+	<image src="/images/icon-1.png" class="u-icon"></image>
+	<input confirm-type="search" value="{{keyword}}" placeholder="大家都在搜'香水'" bindfocus="gotosearch"
+		bindconfirm="search" />
+</view>
+<view class="g-nav-box" s-if="pageName!='搜索'">
+	<view class="u-nav-btn {{item.name == pageName?'f-hover':''}}" s-for="{{navData}}" bindtap="gotoclass"
+		data-nav="{{item}}">
+		<text>{{item.name}}</text>
+	</view>
+</view>
 
 <view class="g-swiper-box">
 	<swiper autoplay="true" indicator-color="#fff" indicator-active-color="#f00b7e" duration="{{switchDuration}}"

@@ -1,6 +1,4 @@
-const app = getApp()
 var config = require('../../js/config')
-var base64 = require('../../utils/base64')
 
 const TOP_DISTANCE = 630;
 var titlepics = []; //setPageInfo 图片容器

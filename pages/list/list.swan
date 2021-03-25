@@ -1,4 +1,4 @@
-<nav pageName="{{pageName}}" keyword="{{keyword}}" pageNumber="{{pageNumber}}" bindsendParentSearch="receiveData"></nav>
+<!-- <nav pageName="{{pageName}}" keyword="{{keyword}}" pageNumber="{{pageNumber}}" bindsendParentSearch="receiveData"></nav> -->
 <view class="g-main-list">
 	<block s-for-index="idx" s-for="{{itemLists}}">
 		<view class="m-list-cont" data-item="{{item}}" bindtap="gotomain">

@@ -27,5 +27,6 @@ App({
     },
     onHide() {
         // do something when hide
-    }
+    },
+    "useSwanNews": true
 });
