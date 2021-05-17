@@ -20,6 +20,7 @@ Page({
         isInWeek: true,
         isParamOk: false,
         isShowSkeleton: false,
+        showComment: true,
         commentParam: {},
         toolbarConfig: {},
     },
@@ -83,7 +84,7 @@ Page({
             data: {
                 action: "detail",
                 id: that.data.id,
-                // id: 49382,
+                // id: 169968,
             },
             success: function (res) {
                 console.log("netData data", res.data);
@@ -161,7 +162,8 @@ Page({
                 })
                 swan.hideLoading();
 
-                that.getOpenid()
+                // that.getOpenid()
+                that.initComment();
 
             },
             fail: function (err) {
@@ -182,6 +184,26 @@ Page({
     },
     onReady() {
         requireDynamicLib('oneStopInteractionLib').listenEvent();
+    },
+    initComment() {
+        var that = this;
+        that.setData({
+            commentParam: {
+                snid: that.data.id,
+                path: '/pages/cmsmain/cmsmain?id=' + that.data.id,
+                title: that.data.title,
+                images: that.data.images,
+            },
+            toolbarConfig: {
+                share: {
+                    title: that.data.title,
+                },
+                moduleList: ['comment', 'like', 'favor', 'share'],
+                placeholder: "回复评论"
+            },
+            // isParamOk: true,
+            showComment: false
+        });
     },
     getOpenid() {
         swan.login({
