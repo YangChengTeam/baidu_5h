@@ -1,4 +1,4 @@
-
+/* eslint-disable no-unused-vars */
 const app = getApp()
 var config = require('../../js/config')
 var base64 = require('../../utils/base64')
@@ -9,14 +9,10 @@ var titlepics = []; //setPageInfo 图片容器
 Page({
     data: {
         pageName: '推荐',
-        itemBanners: [
-        ],
-        itemNews: [
-        ],
-        itemNewsMore: [
-        ],
-        itemData: {
-        },
+        itemBanners: [],
+        itemNews: [],
+        itemNewsMore: [],
+        itemData: {},
         pageNum: 1,
         current: 0,
         switchIndicateStatus: true,
@@ -26,38 +22,38 @@ Page({
         showBackTop: false,
         loading: "加载中...",
         isOneLoading: true,
-        navData: [
-            {
+        adShow:false,
+        navData: [{
                 path: "/pages/home/home",
                 name: "推荐",
                 pageNumber: 0
             },
             {
-                path: "/pages/list/list",
+                path: "/subPackages/pages/list/list",
                 name: "护肤",
                 pageNumber: 17
             },
             {
-                path: "/pages/list/list",
+                path: "/subPackages/pages/list/list",
                 name: "彩妆",
                 pageNumber: 18
             },
             {
-                path: "/pages/list/list",
+                path: "/subPackages/pages/list/list",
                 name: "恋爱",
                 pageNumber: 142
             },
             {
-                path: "/pages/list/list",
+                path: "/subPackages/pages/list/list",
                 name: "婚姻",
                 pageNumber: 143
             },
             {
-                path: "/pages/list/list",
+                path: "/subPackages/pages/list/list",
                 name: "服饰",
                 pageNumber: 32
             }, {
-                path: "/pages/list/list",
+                path: "/subPackages/pages/list/list",
                 name: "发型",
                 pageNumber: 129
             },
@@ -67,23 +63,23 @@ Page({
         console.log("00671", "onInit")
         this.showMyLoading();
         this.getHomeData();
-        this.showMyFavoriteGuide();
+
     },
     onLoad() { // 监听页面加载的生命周期函数
         console.log("00671", "onLoad")
+
     },
     onReady() {
+        this.showMyFavoriteGuide();
     },
-    onShow() {
-    },
+    onShow() {},
     showMyLoading: function () {
-        console.log("showMyLoading isOneLoading", this.data.isOneLoading);
+        // console.log("showMyLoading isOneLoading", this.data.isOneLoading);
         if (this.data.isOneLoading) {
             swan.showLoading({
                 title: '页面加载中...',
                 mask: true,
-                success: function () {
-                },
+                success: function () {},
                 fail: function (err) {
                     console.log('showLoading fail', err);
                 }
@@ -100,7 +96,7 @@ Page({
         }
         var id = res.currentTarget.dataset.item.id;
         var title = res.currentTarget.dataset.item.title;
-        console.log("gotomain cmsmain id : " + id)
+        // console.log("gotomain cmsmain id : " + id)
         swan.navigateTo({
             url: '/pages/cmsmain/cmsmain?id=' + id + '&title=' + title,
         });
@@ -111,7 +107,7 @@ Page({
     },
     showMyFavoriteGuide: function () {
         swan.showFavoriteGuide({
-            type: 'bar',
+            type: 'tip',
             content: '一键关注小程序',
             success: res => {
                 console.log('关注成功：', res);
@@ -139,51 +135,67 @@ Page({
                 swan.hideLoading();
                 console.log("http 请求", config.apiList.baseUrl + " action:index page:" + that.data.pageNum);
                 console.log("http 响应", res.data);
-
                 if (res.data == null) {
                     if (that.data.pageNum == 1) {
-                        that.setData('loading', "没有数据");
+                        that.data.loading = "没有数据"
+                        // that.setData('loading', "没有数据");
                     } else {
-                        that.setData('loading', "没有更多了");
+                        that.data.loading = "没有更多了"
+                        // that.setData('loading', "没有更多了");
                     }
                 }
 
+                if (res.data != null && (res.data.news == null || res.data.news.length < 6)) {
+                    that.data.loading = "没有更多了"
+                    // that.setData({
+                    //     loading: "没有更多了",
+                    // })
+                };
+
+
                 that.data.itemNews = that.data.itemNews.concat(res.data.news);
+
+                // console.log('length', that.data.itemNews.length)
 
                 that.setData({
                     itemNews: that.data.itemNews,
+
                     itemBanners: res.data.banner,
+                    loading: that.data.loading
                 })
-                if (titlepics.length == 0) {
+                // that.setData(`that.data.itemNews[${that.data.pageNum}]`, res.data.news);
+
+                if (res.data.news && titlepics.length == 0) {
                     for (var itemNew of res.data.news) {
                         const titlepic = itemNew.titlepic;
                         titlepics.push(titlepic)
                     }
                     that.setPageInfoData(titlepics, res.data.site)
                 }
-                if (res.data.news == null || res.data.news.length < 6) {
-                    that.setData({
-                        loading: "没有更多了",
-                    })
-                };
+
 
             },
 
             fail: function (err) {
-                console.log('错误码：' + err.errCode);
-                console.log('错误信息：' + err.errMsg);
+                swan.hideLoading();
+                console.log('错误信息：' + err);
             }
         });
     },
     setPageInfoData(titlepics, sites) {
-        console.log("setPageInfoData sites", sites)
+        // console.log("setPageInfoData sites", sites, titlepics)
+        let siteInfo = {
+            pics: titlepics,
+            sites: sites
+        }
+        swan.setStorageSync("siteInfo", siteInfo);
+
         swan.setPageInfo({
             title: sites.title,
             image: titlepics,
             keywords: sites.sitekey,
             description: sites.siteintro,
-            success: function () {
-            },
+            success: function () {},
             fail: function (err) {
                 console.log('setPageInfo fail', err);
             }
@@ -211,9 +223,9 @@ Page({
         const scrollTop = options.scrollTop;
         const flag = scrollTop >= TOP_DISTANCE;
         if (flag != this.data.showBackTop) {
-            this.setData({
-                showBackTop: flag
-            })
+            // this.setData({
+            //     showBackTop: flag
+            // })
         }
     },
     //跳转频道页面
@@ -235,11 +247,11 @@ Page({
         });
     },
     //跳转搜索,如果是搜索页面，则不跳转
-    gotosearch(res) {
+    gotosearch(_res) {
         console.log("nav pageName ", this.data.pageName)
         if (this.data.pageName != '搜索') {
             swan.navigateTo({
-                url: '/pages/search/search'
+                url: '/subPackages/pages/search/search'
                 // url: '/swan-sitemap/index/index?currentPage=1',
             });
         }

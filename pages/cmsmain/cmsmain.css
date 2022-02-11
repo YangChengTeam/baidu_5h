@@ -62,7 +62,7 @@
 }
 
 .g-unfold {
-    background: linear-gradient(to bottom, rgba(255,255,255,0), #fff);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
     width: 100%;
     height: 100rpx;
     position: absolute;
@@ -129,6 +129,7 @@
     margin: 30rpx 0 0;
     display: block;
     overflow: hidden;
+    padding: 0 0 80rpx;
 }
 
 .g-recomd-box .u-line {
@@ -187,12 +188,12 @@
 
 
 .g-recomd-box .m-cont image {
-    width: 223rpx;
+    width: 33%;
     height: 158rpx;
     display: block;
     overflow: hidden;
     margin: 0 0 0 14rpx;
-    flex: 1;
+    /* flex: 1; */
 }
 
 .g-recomd-box .m-cont text {
@@ -277,4 +278,106 @@ view {
     user-select: text !important;
     -moz-user-select: text !important;
     -webkit-user-select: text !important;
+}
+
+.bottom-container {
+    display: flex;
+    width: 100%;
+    height: 90rpx;
+    position: fixed;
+    bottom: 0;
+    background-color: #f8f8f8;
+}
+
+.bottom-container ::before {
+    content: "";
+    height: 0.2rpx;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    background: #e8e8e8;
+    /* border-top: 1rpx solid #f00; */
+}
+
+.bottom-item {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    font-size: 25rpx;
+
+}
+
+
+.bottom-item text {
+    color: #888888;
+    margin-left: 10rpx;
+}
+
+
+.bottom-pic {
+    width: 35rpx;
+    height: 35rpx;
+}
+
+.comment-view {
+    width: 30%;
+    height: 50rpx;
+    border-radius: 8rpx;
+    border: 1rpx solid #222222;
+    background-color: #ffffff;
+    margin: auto 10rpx;
+    font-size: 22rpx;
+    color: #888888;
+    padding: 0 15rpx;
+    line-height: 50rpx
+}
+
+.float-list-wrap {
+    background-color: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: block;
+    height: 600rpx;
+    animation: climbup .5s;
+    width: 100%;
+    z-index: 99;
+    border-top: 1rpx solid rgb(192, 188, 188);
+    border-radius: 10rpx;
+}
+
+.float-title {
+    text-align: center;
+    padding: 20rpx 0;
+}
+
+.float-detail-close {
+    float: right;
+    padding: 20rpx;
+    font-size: 30rpx;
+}
+
+@keyframes climbup {
+
+    /* 因为浮层块高度为600rpx */
+    0% {
+        height: 0;
+    }
+
+    25% {
+        height: 150rpx;
+    }
+
+    50% {
+        height: 300rpx;
+    }
+
+    75% {
+        height: 450rpx;
+    }
+
+    100% {
+        height: 600rpx;
+    }
 }

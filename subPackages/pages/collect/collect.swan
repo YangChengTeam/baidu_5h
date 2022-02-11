@@ -1,0 +1,3 @@
+<list itemLists="{{collectList}}" show="false" />
+
+<view class="u-loading-text">{{loading}}</view>

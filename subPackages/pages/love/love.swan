@@ -1,0 +1,3 @@
+<list itemLists="{{loveLists}}" show="false"></list>
+
+<view class="u-loading-text">{{loading}}</view>

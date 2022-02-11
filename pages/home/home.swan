@@ -1,42 +1,33 @@
 <!-- <nav pageName="{{pageName}}"></nav> -->
 
 <view class="g-search-box">
-	<image src="/images/icon-1.png" class="u-icon"></image>
-	<input confirm-type="search" value="{{keyword}}" placeholder="大家都在搜'香水'" bindfocus="gotosearch"
-		bindconfirm="search" />
+    <image src="/images/icon-1.png" class="u-icon"></image>
+    <input confirm-type="search" value="{{keyword}}" placeholder="大家都在搜'香水'" bindfocus="gotosearch"
+        bindconfirm="search" />
 </view>
 <view class="g-nav-box" s-if="pageName!='搜索'">
-	<view class="u-nav-btn {{item.name == pageName?'f-hover':''}}" s-for="{{navData}}" bindtap="gotoclass"
-		data-nav="{{item}}">
-		<text>{{item.name}}</text>
-	</view>
+    <view class="u-nav-btn {{item.name == pageName?'f-hover':''}}" s-for="{{navData}}" bindtap="gotoclass"
+        data-nav="{{item}}">
+        <text>{{item.name}}</text>
+    </view>
 </view>
 
 <view class="g-swiper-box">
-	<swiper autoplay="true" indicator-color="#fff" indicator-active-color="#f00b7e" duration="{{switchDuration}}"
-		interval="{{autoPlayInterval}}" autoplay="{{switchAutoPlayStatus}}" indicator-dots="{{switchIndicateStatus}}"
-		vertical="false" circular="true" current="0" bind:change="swiperChange">
-		<block s-for="item in itemBanners">
-			<swiper-item bindtap='gotomain' data-item="{{item}}" class="m-swiper-cont">
-				<view class="u-swiper-li">
-					<image src="{{item.titlepic}}"></image>
-					<text>{{item.title}}</text>
-				</view>
-			</swiper-item>
-		</block>
-	</swiper>
+    <swiper autoplay="true" indicator-color="#fff" indicator-active-color="#f00b7e" duration="{{switchDuration}}"
+        interval="{{autoPlayInterval}}" autoplay="{{switchAutoPlayStatus}}" indicator-dots="{{switchIndicateStatus}}"
+        vertical="false" circular="true" current="0" bind:change="swiperChange">
+        <block s-for="item in itemBanners">
+            <swiper-item bindtap='gotomain' data-item="{{item}}" class="m-swiper-cont">
+                <view class="u-swiper-li">
+                    <image src="{{item.titlepic}}"></image>
+                    <text>{{item.title}}</text>
+                </view>
+            </swiper-item>
+        </block>
+    </swiper>
 </view>
 
-<view class="g-main-list">
-	<block s-for-index="idx"s-for="{{itemNews}}">
-		<view class="m-list-cont"   data-item="{{item}}" catchtap='gotomain' >
-			<image src="{{item.titlepic}}}"></image>
-			<text>{{item.title}}}</text>
-		</view>
-        <view class="m-list-cont2" s-if="{{(idx+1)%6==0}}">
-            <ad  class="ad"  appid="c346a49a" apid="6539265" type="feed"></ad>
-        </view>
-	</block>
-</view>
+<list itemLists="{{itemNews}}" apid="6539265" show="{{adShow}}"></list>
+
 <view class="u-loading-text">{{loading}}</view>
 <w-back-top bindtap="onBackTop" s-if="{{showBackTop}}" />

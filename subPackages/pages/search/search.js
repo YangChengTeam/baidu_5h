@@ -1,5 +1,5 @@
 const app = getApp()
-var config = require('../../js/config')
+var config = require('../../../js/config')
 
 Page({
     data: {
@@ -44,14 +44,14 @@ Page({
             return false;
         }
         swan.navigateTo({
-            url: '/pages/list/list?pageName=' + this.data.pageName + '&keyword=' + this.data.keyword
+            url: '/subPackages/pages/list/list?pageName=' + this.data.pageName + '&keyword=' + this.data.keyword
         });
     },
     //热门搜索跳转
     hotgoin(res) {
         var key = res.currentTarget.dataset.val
         swan.navigateTo({
-            url: '/pages/list/list?pageName=' + this.data.pageName + '&keyword=' + key
+            url: '/subPackages/pages/list/list?pageName=' + this.data.pageName + '&keyword=' + key
         });
     },
     getHotData: function () {

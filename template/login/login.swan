@@ -1,0 +1,12 @@
+<view class="container" s-if="{{show}}">
+    <view class="compont-container" />
+    <view class="content-container">
+        <image class="close-right" src="../../images/close.png" bindtap="close"></image>
+        <image class="close-center" src="../../images/close_circle.png"></image>
+        <text class="content-text">您还未登录，请先授权登录后,{{tint}}</text>
+        <button open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="btn" type="primary">登录授权</button>
+        <!-- <button open-type="login" bindlogin="login"  class="btn" type="primary">登录授权</button> -->
+    </view>
+</view>
+
+<!--to do-->

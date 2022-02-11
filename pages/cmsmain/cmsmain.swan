@@ -1,4 +1,6 @@
 <import src="../../bdParse/bdParse/bdParse.swan" />
+<import-sjs src="../utils.sjs" module="utils" />
+
 <image class="g-skeleton" hidden='{{isShowSkeleton}}' src="/images/cmsmain_Skeleton.png" }}"></image>
 <text class="g-h1">{{title}}}</text>
 <view class="g-h2">
@@ -9,42 +11,80 @@
 <view class="g-main-box {{ellipsis?'ellipsis':'unellipsis'}}">
     <template is="bdParse" data="{{ {bdParseData:article.nodes} }}" />
     <!-- 这是透明背景，完全显示的时候，隐藏这个-->
-    <view class="{{ellipsis?'u-bg':'u-bg-ellipsis'}}"></view>
+    <!-- <view class="{{ellipsis?'u-bg':'u-bg-ellipsis'}}"></view>
 
-    <view class="g-unfold" hidden='{{isBindEllipsis}}}'></view>
+    <view class="g-unfold" hidden='{{isBindEllipsis}}}'></view> -->
 </view>
 <!-- 显示更多按钮，点击展开后，添加class：“f-hover”，让箭头变上 -->
-<view class="{{ellipsis?'g-main-btn':'g-main-btn-ellipsis'}} " hidden='{{isBindEllipsis}}}' bindtap='ellipsis'>
+<!-- <view class="{{ellipsis?'g-main-btn':'g-main-btn-ellipsis'}} " hidden='{{isBindEllipsis}}}' bindtap='ellipsis'>
     <text>显示全部</text>
     <view class="u-icon"></view>
-</view>
+</view> -->
 
-<view class="g-recomd-box">
+<!--猜你喜欢-->
+<!-- <view class="g-recomd-box">
     <view class="u-line" />
     <text class="u-h3">{{relatedTitle}}}</text>
     <ad appid="c346a49a" apid="7408125" class="ad" type="feed"></ad>
     <ad appid="c346a49a" apid="7408205" class="ad" type="feed"></ad>
-</view>
+</view>-->
 
 
 <view class="g-recomd-box">
     <view class="u-line" />
     <text class="u-h3">{{recommendTitle}}}</text>
     <view s-for-index="idx" s-for="{{itemRecommends}}">
-        <ad s-if="{{(idx)%2==0}}" appid="c346a49a" apid="7408208" class="ad" type="feed"></ad>
+        <!-- 7408208 -->
+        <ad s-if="{{(idx)%3==0 && idx<9 }}" appid="c346a49a" apid="{{utils.getAd()}}" class="ad" type="feed">
+        </ad>
         <view class="m-cont" data-item="{{item}}" bindtap='gotomain'>
-            <text>{{item.title}}}</text>
-            <view class="m-imag">
-                <image src="{{item.images[0]}}}"></image>
-                <image src="{{item.images[1]}}}"></image>
-                <image src="{{item.images[2]}}}"></image>
-            </view>
+            <block s-if="{{item.images.length==1}}">
+                <view class="m-imag">
+                    <image src="{{item.images[0]}}"></image>
+                    <text>{{item.title}}}</text>
+                </view>
+            </block>
+            <block s-else>
+                <text>{{item.title}}}</text>
+                <view class="m-imag">
+                    <block s-for="{{item.images}}" s-for-item="img">
+                        <image src="{{img}}"></image>
+                    </block>
+                    <!-- <image src="{{item.images[1]}}}"></image>
+                <image src="{{item.images[2]}}}"></image> -->
+                </view>
+            </block>
+
         </view>
     </view>
-    <ad appid="c346a49a" apid="7408206" class="ad" type="feed"></ad>
+    <!-- <ad appid="c346a49a" apid="7408206" class="ad" type="feed"></ad> -->
 </view>
 <view>
     <!-- 评论列表组件 -->
-    <comment-list comment-param="{{commentParam}}" toolbar-config="{{toolbarConfig}}" hidden="{{showComment}}">
-    </comment-list>
+    <view class="float-list-wrap" s-if="{{showList}}">
+        <view class="float-detail-close" bindtap="hideComment">关闭</view>
+        <view class="float-title">全部评论</view>
+        <comment-list add-comment="{{addComment}}" comment-param="{{commentParam}}" toolbar-config="{{toolbarConfig}}"
+            is-page-scroll="{{true}}" hidden="{{showComment}}">
+        </comment-list>
+    </view>
+
+
+    <view class="bottom-container">
+        <view class="comment-view" bindtap='addComment'>回复评论</view>
+        <view class="bottom-item" bindtap="like">
+            <image class="bottom-pic" src="{{islike?'../../images/heart.png':'../../images/heart_no.png'}}"></image>
+            <text>{{like}}</text>
+        </view>
+        <view class="bottom-item" bindtap="collect">
+            <image class="bottom-pic" src="{{iscollect?'../../images/collect_yes.png':'../../images/collect_no.png'}}">
+            </image>
+            <text>{{collect}}</text>
+        </view>
+        <view class="bottom-item" bindtap="shareApp">
+            <image class="bottom-pic" src="../../images/share.png"></image>
+            <text>分享</text>
+        </view>
+    </view>
 </view>
+<login tint="再点赞收藏！" show="{{show}}" bindcloseevent="close" bindmyevent="listener" data-swan="{{1}}"></login>

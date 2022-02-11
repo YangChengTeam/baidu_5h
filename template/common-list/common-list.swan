@@ -1,0 +1,15 @@
+<view class="g-main-list">
+    <block s-for-index="idx" s-for="{{itemLists}}">
+        <view class="m-list-cont" data-item="{{item}}" bindtap="gotomain">
+            <image src="{{item.titlepic}}"></image>
+            <text>{{item.title}}}</text>
+        </view>
+        <view class="m-list-cont2" s-if="{{(idx+1)%6==0&&show}}">
+            <ad appid="c346a49a" apid="{{apid}}" class="ad" type="feed"></ad>
+        </view>
+        <view class="m-list-cont2" s-if="{{idx+1==itemLists.length&&show}}" hidden="{{hide}}">
+            <ad appid="c346a49a" apid="{{apid}}" class="ad" type="feed"></ad>
+        </view>
+    </block>
+
+</view>
